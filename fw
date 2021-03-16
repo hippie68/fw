@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Shows the SDK version ("firmware") of one or multiple PS4 PKG files.
+# Requires Bash script "sfo" (https://github.com/hippie68/sfo) in $PATH.
+
+# If you have renamed "sfo", enter the correct name here:
+sfo_script_name=sfo
+
+# Script starts here ##########################################################
+
+# Use current directory if no arguments provided
+[[ $* == "" ]] && set -- .
+
+# Accepts a PKG file name and returns its firmware version
+show_firmware() {
+  firmware=$("$sfo_script_name" "$1" pubtoolinfo \
+    | grep -Po '(?<=sdk_ver=)[0-9]{4}' \
+    | sed -e 's/\(^..\)/\1\./' -e 's/^0//')
+  if [[ ${PIPESTATUS[0]} != 0 ]]; then
+    echo -e "ERROR\\t$1"
+  else
+    echo -e "$firmware\\t${1##*/}"
+  fi
+}
+
+declare -a pkgfiles
+
+# Collect list of PKG files
+for arg in "$@"; do
+  if [[ -d "$arg" ]]; then
+    while read -r file; do
+      pkgfiles+=("$file")
+    done < <(find "$arg" -maxdepth 1 -type f -iname '*.pkg')
+  elif [[ -f "$arg" ]]; then
+    pkgfiles+=("$arg")
+  fi
+done
+
+# Run firmware check on list
+if [[ ${pkgfiles[*]} != "" ]]; then
+  echo -e "FW:\\tFile name:"
+  for file in "${pkgfiles[@]}"; do
+    show_firmware "$file"
+  done
+fi
