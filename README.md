@@ -1,5 +1,6 @@
 # fw
 Simple Bash script that shows PS4 PKG's required firmware.
+Requires Bash script "sfo" (https://github.com/hippie68/sfo) in $PATH.
 
 Usage:
 
