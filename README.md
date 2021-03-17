@@ -20,7 +20,8 @@ Example output:
 
 Explanation:
 - SDK: You can, theoretically, run the game if your real firmware version is equal or higher.
-- FW: You can run the game if your real firmware version is equal or higher OR if you spoof your firmware version.  
+- FW: You can run the game if your real firmware version is equal or higher OR if you spoof your firmware version.
+
 Both conditions, for SDK and FW, must be met.
 In the depicted, theoretical example, the update PKG is obviously backported. If your real firmware is lower than 7.00 you can run the game after you installed the patch and spoofed your firmware version (which recent HENs do automatically).
 
