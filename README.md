@@ -8,8 +8,8 @@ Usage:
     
 Options:
 
-    -h Display help
-    -r Traverse directories recursively
+    -h  Display help
+    -r  Traverse directories recursively
 
 Example output:
 
