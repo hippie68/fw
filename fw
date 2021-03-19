@@ -67,7 +67,7 @@ for arg in "$@"; do
   if [[ -d "$arg" ]]; then
     while read -r file; do
       pkgfiles+=("$file")
-    done < <(find "$arg" $find_option -type f -iname '*.pkg')
+    done < <(find "$arg" $find_option -type f -iname '*.pkg' | sort)
   elif [[ -f "$arg" ]]; then
     pkgfiles+=("$arg")
   else
